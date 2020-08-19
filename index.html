@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+
+<body>
+  <div id="app">
+    <template>
+      <v-app>
+        <v-main>
+          <template>
+            <v-card max-width="500" class="mx-auto">
+              <v-toolbar color="pink" dark>
+                <v-toolbar-title>生日提醒</v-toolbar-title>
+                <v-spacer></v-spacer>
+              </v-toolbar>
+
+              <v-list two-line>
+                <v-list-item-group v-model="selected" multiple active-class="pink--text">
+                  <template v-for="(item, index) in items">
+                    <v-list-item :key="item.title">
+                      <template v-slot:default="{ active, toggle }">
+                        <v-list-item-content>
+                          <v-list-item-title v-text="item.name"></v-list-item-title>
+                          <v-list-item-subtitle class="text--primary" v-text="item.type"></v-list-item-subtitle>
+                          <v-list-item-subtitle v-text="item.date"></v-list-item-subtitle>
+                        </v-list-item-content>
+
+                        <v-list-item-action>
+                          <v-list-item-action-text v-text="item.remain"></v-list-item-action-text>
+                          <v-icon v-if="!active" color="grey lighten-1">
+                            star_border
+                          </v-icon>
+
+                          <v-icon v-else color="yellow">
+                            star
+                          </v-icon>
+                        </v-list-item-action>
+                      </template>
+                    </v-list-item>
+
+                    <v-divider v-if="index + 1 < items.length" :key="index"></v-divider>
+                  </template>
+                </v-list-item-group>
+              </v-list>
+            </v-card>
+          </template>
+        </v-main>
+      </v-app>
+    </template>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: () => ({
+        selected: [2],
+        items: [
+          {
+            name: '叶云鹏',
+            type: '农历',
+            date: "1990-09-12",
+            remain: '15 min',
+          },
+        ],
+      }),
+    })
+  </script>
+</body>
+
+</html>
